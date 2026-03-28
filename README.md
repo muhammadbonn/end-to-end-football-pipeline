@@ -43,7 +43,7 @@ end-to-end-football-pipeline/
 │
 ├── scripts/                   # (Current) PySpark data transformation modules
 │   ├── utils/                 # Helper functions and environment setup
-│   ├── processors/            #
+│   ├── processors/            # Helper modules for data processing
 │   ├── ingestion_pipeline.py  # Main script for data ingestion
 │   └── production_pipeline.py # Main execution script for data processing
 │
