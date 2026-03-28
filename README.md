@@ -1,5 +1,4 @@
 # End-to-End Football Data Engineering Pipeline
-
 ## Project Overview
 This project is an end-to-end data engineering pipeline designed to extract, transform, and load (ETL) advanced football statistics. The goal is to build a robust Data Warehouse that can support advanced analytics and BI dashboards.
 
@@ -63,5 +62,6 @@ end-to-end-football-pipeline/
 │
 ├── requirements.txt           # Python project dependencies
 ├── docker-compose.yml         # (Future) Docker configuration for local Airflow
+├── .env                       # Environment variables and configuration settings
 └── README.md                  # Main project documentation and overview
 ```
