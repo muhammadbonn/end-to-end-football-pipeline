@@ -1,5 +1,5 @@
-USE DATABASE FOOTBALL_DB;
-USE SCHEMA STAGING;
+USE DATABASE ete_football_db;
+USE SCHEMA Staging;
 
 -- ==========================================
 -- 1. Load Leagues Data
