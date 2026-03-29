@@ -97,7 +97,7 @@ The project uses two configuration files for security. .env is ignored by Git, s
     
     B. Edit terraform.tfvars (for Infrastructure)
     
-    [View File(./terraform/terraform.tfvars)]
+    [View File](./terraform/terraform.tfvars)
 
 
 3. Deploy Infrastructure (Terraform)
@@ -123,7 +123,7 @@ Then, open your browser at http://localhost:2626 (User: admin, Pass: admin) and 
 ```
 end-to-end-football-pipeline/
 │
-├── dags/                      # (Future) Apache Airflow DAGs for orchestration
+├── dags/                      # Apache Airflow DAGs for orchestration
 │   └── football_etl_dag.py    # Main DAG to trigger and monitor the pipeline
 │
 ├── scripts/                   # PySpark data transformation modules
@@ -141,11 +141,12 @@ end-to-end-football-pipeline/
 │   ├── main.tf                # Main configuration for AWS and Snowflake resources
 │   └── terraform.tfvars
 │
-├── dashboards/                # (Future) BI dashboards and visualizations
+├── dashboards/                # BI dashboards and visualizations
 │   └── screenshots/           # Dashboard screenshots for the README file
 │
 ├── requirements.txt           # Python project dependencies
-├── docker-compose.yml         # (Future) Docker configuration for local Airflow
+├── Dockerfile                 # Docker instructions
+├── docker-compose.yml         # Docker configuration for local Airflow
 ├── .env                       # Environment variables and configuration settings
 └── README.md                  # Main project documentation and overview
 ```
