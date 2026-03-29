@@ -90,6 +90,7 @@ The project uses two configuration files for security. Since `.env` is ignored b
      AWS_DEFAULT_REGION=your_aws_region
      S3_BUCKET_NAME=your_unique_bucket
      KAGGLE_PATH=technika148/football-database
+     PYTHONPATH=/opt/airflow/scripts:/opt/airflow
      ```
 
    * **B. Configure Infrastructure (Terraform)** Navigate to the `terraform/` directory and edit the `terraform.tfvars` file based on the template:  
