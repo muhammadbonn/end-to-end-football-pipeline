@@ -1,4 +1,5 @@
 import os
+import shutil
 import kagglehub
 from dotenv import load_dotenv
 from utils.spark_utils import init_spark_with_s3
@@ -39,13 +40,24 @@ def load_env():
 def download_kaggle_dataset(kaggle_path):
     """
     Download dataset from Kaggle and return local path.
+    Clears the kagglehub cache first to prevent corrupted zip file errors.
     """
     if not kaggle_path:
         raise ValueError("kaggle_path is missing")
 
-    print("Downloading dataset from Kaggle...")
+    # 1. Define the cache directory path for kagglehub
+    cache_path = os.path.expanduser('~/.cache/kagglehub')
+    
+    # 2. Check if the cache directory exists, and if so, delete it entirely
+    # This ensures an idempotent run and prevents zipfile.BadZipFile errors
+    if os.path.exists(cache_path):
+        print(f"Clearing old cache at: {cache_path} to avoid Corrupted/BadZipFile errors...")
+        shutil.rmtree(cache_path)
+
+    # 3. Proceed with a fresh download
+    print("Downloading fresh dataset from Kaggle...")
     dataset_path = kagglehub.dataset_download(kaggle_path)
-    print(f"Dataset stored at: {dataset_path}")
+    print(f"Dataset stored successfully at: {dataset_path}")
 
     return dataset_path
 
