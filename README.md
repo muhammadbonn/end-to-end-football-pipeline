@@ -1,7 +1,35 @@
-# End-to-End Football Data Engineering Pipeline
-## Project Overview
-This project is an end-to-end data engineering pipeline designed to extract, transform, and load (ETL) advanced football statistics. The goal is to build a robust Data Warehouse that can support advanced analytics and BI dashboards.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Apache Spark](https://img.shields.io/badge/Apache%20Spark-F1502F?style=for-the-badge&logo=apachespark&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Snowflake](https://img.shields.io/badge/snowflake-%2329B5E8.svg?style=for-the-badge&logo=snowflake&logoColor=white)
+![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
+![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=Apache%20Airflow&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
+# End-to-End Football Data Engineering Pipeline
+## Project Philosophy & Problem Statement
+
+While this project uses European Football Data as a case study, the core objective was to engineer a production-grade data platform.
+
+The Challenge: Football data is notoriously messy—player names have special characters, match events are deeply nested, and statistics like "Expected Goals (xG)" require complex derived calculations. Processing this at scale manually is impossible.
+
+The Solution:
+I built this pipeline to explore how modern data tools can work in harmony:
+
+    Infrastructure: Using Terraform to treat the cloud as code, avoiding manual errors.
+
+    Processing: Using PySpark to handle "Big Data" cleaning patterns (handling nulls, schema enforcement, and feature engineering like shot distances).
+
+    Storage & Analytics: Bridging the gap between a Data Lake (S3) and a Cloud Data Warehouse (Snowflake) for high-performance BI
+
+Why Football Data? > The dataset (scraped from Understat/Kaggle) includes over 600,000 shots and thousands of games. It provides a perfect playground for:
+
+    Data Cleaning: Handling inconsistent naming conventions across leagues.
+
+    Type Casting: Managing complex timestamps and coordinate systems (X, Y positions).
+
+    Aggregation: Building complex analytical views like "Striker Efficiency" which requires joining multiple large tables
+    
 ---
 ## Technology Stack
 **Current Stack:**
@@ -9,29 +37,81 @@ This project is an end-to-end data engineering pipeline designed to extract, tra
 * **Data Processing:** Apache Spark (PySpark)
 * **Data Lake:** AWS S3
 * **Data Warehouse:** Snowflake
-
----
-**Upcoming Integration:**
 * **Orchestration:** Apache Airflow
 * **Infrastructure as Code (IaC):** Terraform
 * **Data Visualization:** Streamlit
 
 ---
-## Architecture & Workflow (Phase 1)
+## Architecture & Workflow
 1. **Data Ingestion:** Raw CSV data is processed locally.
 2. **Data Transformation:** PySpark is utilized to clean data, handle nulls (e.g., casting 'NA' strings safely), generate derived metrics (like shot distances and zones), and enforce schema structures.
 3. **Cloud Storage (Data Lake):** Transformed data is written in `Parquet` format to an AWS S3 staging bucket.
 4. **Data Warehouse Loading:** Snowflake executes `COPY INTO` commands to securely load the staged Parquet files into structured relational tables (Star/Snowflake Schema).
 
 ---
-## Project Roadmap
-This project is being developed iteratively. Below is the current progress:
+## Installation & Setup
 
-- [x] **Phase 1:** PySpark Transformations & AWS S3 Integration.
-- [x] **Phase 2:** Snowflake Data Warehouse Setup & Staging.
-- [ ] **Phase 3:** Pipeline Orchestration using **Apache Airflow**.
-- [ ] **Phase 4:** Infrastructure setup via **Terraform**.
-- [ ] **Phase 5:** Interactive BI **Dashboards**.
+Follow these steps to replicate the pipeline on your local machine:
+
+0. Prerequisites
+
+Before you begin, ensure you have the following:
+
+    AWS Account: To create an S3 bucket and IAM keys.
+
+    Snowflake Account: A trial account works perfectly (Note your Account Identifier).
+
+    Docker & Docker Compose: Installed on your machine.
+
+    Terraform: Installed if you want to manage infrastructure.
+
+1. Clone the Repository
+
+To get a local copy up and running, follow these simple steps:
+
+First, clone the project to your local machine using Git:
+```
+git clone https://github.com/muhammadbonn/end-to-end-football-pipeline.git
+cd end-to-end-football-pipeline
+```
+
+2. Environment Setup
+
+The project uses two configuration files for security. .env is ignored by Git, so you must create it manually:
+
+A. Create .env file (for Airflow & Python)
+
+In the root directory, create a file named .env and fill it with your credentials:
+```
+AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
+AWS_DEFAULT_REGION=your_aws_region_here
+S3_BUCKET_NAME=your_unique_s3_bucket_name_here
+KAGGLE_PATH=technika148/football-database
+```
+
+B. Edit terraform.tfvars (for Infrastructure)
+
+[View File(./terraform/terraform.tfvars)
+
+
+3. Deploy Infrastructure (Terraform)
+
+Run the following commands to build your AWS and Snowflake environment:
+```
+cd terraform
+terraform init
+terraform apply -auto-approve
+```
+
+4. Run the Pipeline (Docker & Airflow)
+Start the automated orchestration:
+```
+docker-compose up airflow-init
+docker-compose up -d
+```
+
+Then, open your browser at http://localhost:2626 (User: admin, Pass: admin) and trigger the football_etl_pipeline DAG
 
 ---
 ## Project Structure
@@ -41,21 +121,20 @@ end-to-end-football-pipeline/
 ├── dags/                      # (Future) Apache Airflow DAGs for orchestration
 │   └── football_etl_dag.py    # Main DAG to trigger and monitor the pipeline
 │
-├── scripts/                   # (Current) PySpark data transformation modules
+├── scripts/                   # PySpark data transformation modules
 │   ├── utils/                 # Helper functions and environment setup
 │   ├── processors/            # Helper modules for data processing
 │   ├── ingestion_pipeline.py  # Main script for data ingestion
 │   └── production_pipeline.py # Main execution script for data processing
 │
-├── sql/                       # (Current) Snowflake DDL and DML scripts
-│   ├── 01_setup_and_stage.sql
-│   ├── 02_create_tables.sql
-│   └── 03_load_data.sql
+├── sql/                       # Snowflake DDL and DML scripts
+│   ├── 01_create_tables.sql
+│   ├── 02_load_data.sql
+│   └── 03_gold_layer_tables.sql
 │
-├── terraform/                 # (Future) Infrastructure as Code (IaC) configuration
+├── terraform/                 # (Infrastructure as Code (IaC) configuration
 │   ├── main.tf                # Main configuration for AWS and Snowflake resources
-│   ├── variables.tf
-│   └── providers.tf
+│   └── terraform.tfvars
 │
 ├── dashboards/                # (Future) BI dashboards and visualizations
 │   └── screenshots/           # Dashboard screenshots for the README file
