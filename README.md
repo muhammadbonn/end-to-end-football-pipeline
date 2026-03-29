@@ -58,7 +58,7 @@ The pipeline follows a modern Medallion Architecture (Bronze, Silver, Gold) orch
 
 Follow these steps to replicate the pipeline on your local machine:
 
-0. Prerequisites
+### 0. Prerequisites
 
 Before you begin, ensure you have the following:
 
