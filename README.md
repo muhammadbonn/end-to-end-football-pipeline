@@ -111,7 +111,8 @@ docker-compose up airflow-init
 docker-compose up -d
 ```
 
-Then, open your browser at http://localhost:2626 (User: admin, Pass: admin) and trigger the football_etl_pipeline DAG
+### 5. Trigger the DAG (Airflow)
+Open your browser at http://localhost:2626 (User: admin, Pass: admin) and trigger the football_etl_pipeline DAG
 
 ---
 ## Project Structure
