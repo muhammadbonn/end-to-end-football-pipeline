@@ -65,6 +65,8 @@ Before you begin, ensure you have the following:
     AWS Account: To create an S3 bucket and IAM keys.
 
     Snowflake Account: A trial account works perfectly (Note your Account Identifier).
+    
+    Kaggle Account: A Kaggle API Token
 
     Docker & Docker Compose: Installed on your machine.
 
@@ -89,6 +91,7 @@ The project uses two configuration files for security. Since `.env` is ignored b
      AWS_SECRET_ACCESS_KEY=your_aws_secret
      AWS_DEFAULT_REGION=your_aws_region
      S3_BUCKET_NAME=your_unique_bucket
+     KAGGLE_API_TOKEN=your_kaggle_api_token
      KAGGLE_PATH=technika148/football-database
      PYTHONPATH=/opt/airflow/scripts:/opt/airflow
      ```
