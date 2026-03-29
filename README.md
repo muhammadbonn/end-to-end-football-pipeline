@@ -97,7 +97,7 @@ The project uses two configuration files for security. .env is ignored by Git, s
     
     B. Edit terraform.tfvars (for Infrastructure)
     
-    [View File](./terraform/terraform.tfvars)
+[View File](./terraform/terraform.tfvars)
 
 
 3. Deploy Infrastructure (Terraform)
