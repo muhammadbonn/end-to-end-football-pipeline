@@ -70,7 +70,7 @@ Before you begin, ensure you have the following:
 
     Terraform: Installed if you want to manage infrastructure.
 
-1. Clone the Repository
+### 1. Clone the Repository
 
 To get a local copy up and running, follow these simple steps:
 
@@ -80,36 +80,31 @@ git clone https://github.com/muhammadbonn/end-to-end-football-pipeline.git
 cd end-to-end-football-pipeline
 ```
 
-2. Environment Setup
+### 2. Environment Setup
+The project uses two configuration files for security. Since `.env` is ignored by Git, you must create it manually:
 
-The project uses two configuration files for security. .env is ignored by Git, so you must create it manually:
+   * **A. Create `.env` file (for Airflow & Python)** In the root directory, create a file named `.env` and add your credentials:
+     ```env
+     AWS_ACCESS_KEY_ID=your_aws_key
+     AWS_SECRET_ACCESS_KEY=your_aws_secret
+     AWS_DEFAULT_REGION=your_aws_region
+     S3_BUCKET_NAME=your_unique_bucket
+     KAGGLE_PATH=technika148/football-database
+     ```
 
-    A. Create .env file (for Airflow & Python)
-    
-    In the root directory, create a file named .env and fill it with your credentials:
-        
-        AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
-        AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
-        AWS_DEFAULT_REGION=your_aws_region_here
-        S3_BUCKET_NAME=your_unique_s3_bucket_name_here
-        KAGGLE_PATH=technika148/football-database
-        
-    
-    B. Edit terraform.tfvars (for Infrastructure)
-    
-[View File](./terraform/terraform.tfvars)
+   * **B. Configure Infrastructure (Terraform)** Navigate to the `terraform/` directory and edit the `terraform.tfvars` file based on the template:  
+     [View Template File](./terraform/terraform.tfvars)
 
-
-3. Deploy Infrastructure (Terraform)
-
+### 3. Deploy Infrastructure (Terraform)
 Run the following commands to build your AWS and Snowflake environment:
+
 ```
 cd terraform
 terraform init
 terraform apply -auto-approve
 ```
 
-4. Run the Pipeline (Docker & Airflow)
+### 4. Run the Pipeline (Docker & Airflow)
 Start the automated orchestration:
 ```
 docker-compose up airflow-init
