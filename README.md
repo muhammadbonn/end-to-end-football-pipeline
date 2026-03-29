@@ -28,11 +28,10 @@ Why Football Data? > The dataset (scraped from Understat/Kaggle) includes over 6
 
     Type Casting: Managing complex timestamps and coordinate systems (X, Y positions).
 
-    Aggregation: Building complex analytical views like "Striker Efficiency" which requires joining multiple large tables
+    Aggregation: Building complex analytical views like "Striker Efficiency" which requires joining multiple large tables.
     
 ---
 ## Technology Stack
-**Current Stack:**
 * **Language:** Python
 * **Data Processing:** Apache Spark (PySpark)
 * **Data Lake:** AWS S3
@@ -43,10 +42,16 @@ Why Football Data? > The dataset (scraped from Understat/Kaggle) includes over 6
 
 ---
 ## Architecture & Workflow
-1. **Data Ingestion:** Raw CSV data is processed locally.
-2. **Data Transformation:** PySpark is utilized to clean data, handle nulls (e.g., casting 'NA' strings safely), generate derived metrics (like shot distances and zones), and enforce schema structures.
-3. **Cloud Storage (Data Lake):** Transformed data is written in `Parquet` format to an AWS S3 staging bucket.
-4. **Data Warehouse Loading:** Snowflake executes `COPY INTO` commands to securely load the staged Parquet files into structured relational tables (Star/Snowflake Schema).
+
+The pipeline follows a modern Medallion Architecture (Bronze, Silver, Gold) orchestrated entirely by Apache Airflow:
+
+    Ingestion (Bronze): Automated extraction of raw football datasets from Kaggle directly to AWS S3 using Python.
+
+    Transformation (Silver): PySpark jobs running inside Docker containers to clean data, handle nulls, and engineer new features (e.g., shot distances and zones). Data is saved back to S3 in optimized Parquet format.
+
+    Data Warehouse (Gold): Dynamic Snowflake integration where clean data is loaded via COPY INTO commands into structured relational tables for high-performance analytics.
+
+    Infrastructure as Code: The entire cloud environment (S3 buckets, Snowflake databases, and roles) is provisioned and managed using Terraform.
 
 ---
 ## Installation & Setup
@@ -79,20 +84,20 @@ cd end-to-end-football-pipeline
 
 The project uses two configuration files for security. .env is ignored by Git, so you must create it manually:
 
-A. Create .env file (for Airflow & Python)
-
-In the root directory, create a file named .env and fill it with your credentials:
-```
-AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
-AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
-AWS_DEFAULT_REGION=your_aws_region_here
-S3_BUCKET_NAME=your_unique_s3_bucket_name_here
-KAGGLE_PATH=technika148/football-database
-```
-
-B. Edit terraform.tfvars (for Infrastructure)
-
-[View File(./terraform/terraform.tfvars)
+    A. Create .env file (for Airflow & Python)
+    
+    In the root directory, create a file named .env and fill it with your credentials:
+    ```
+    AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
+    AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
+    AWS_DEFAULT_REGION=your_aws_region_here
+    S3_BUCKET_NAME=your_unique_s3_bucket_name_here
+    KAGGLE_PATH=technika148/football-database
+    ```
+    
+    B. Edit terraform.tfvars (for Infrastructure)
+    
+    [View File(./terraform/terraform.tfvars)]
 
 
 3. Deploy Infrastructure (Terraform)
