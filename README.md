@@ -87,13 +87,13 @@ The project uses two configuration files for security. .env is ignored by Git, s
     A. Create .env file (for Airflow & Python)
     
     In the root directory, create a file named .env and fill it with your credentials:
-    ```
-    AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
-    AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
-    AWS_DEFAULT_REGION=your_aws_region_here
-    S3_BUCKET_NAME=your_unique_s3_bucket_name_here
-    KAGGLE_PATH=technika148/football-database
-    ```
+        
+        AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
+        AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
+        AWS_DEFAULT_REGION=your_aws_region_here
+        S3_BUCKET_NAME=your_unique_s3_bucket_name_here
+        KAGGLE_PATH=technika148/football-database
+        
     
     B. Edit terraform.tfvars (for Infrastructure)
     
@@ -123,30 +123,30 @@ Then, open your browser at http://localhost:2626 (User: admin, Pass: admin) and 
 ```
 end-to-end-football-pipeline/
 │
-├── dags/                      # Apache Airflow DAGs for orchestration
-│   └── football_etl_dag.py    # Main DAG to trigger and monitor the pipeline
+├── dags/                                       # Apache Airflow DAGs for orchestration
+│   └── football_etl_dag.py                     # Main DAG to trigger and monitor the pipeline
 │
-├── scripts/                   # PySpark data transformation modules
-│   ├── utils/                 # Helper functions and environment setup
-│   ├── processors/            # Helper modules for data processing
-│   ├── ingestion_pipeline.py  # Main script for data ingestion
-│   └── production_pipeline.py # Main execution script for data processing
+├── scripts/                                    # PySpark data transformation modules
+│   ├── utils/                                  # Helper functions and environment setup
+│   ├── processors/                             # Helper modules for data processing
+│   ├── ingestion_pipeline.py                   # Main script for data ingestion
+│   └── production_pipeline.py                  # Main execution script for data processing
 │
-├── sql/                       # Snowflake DDL and DML scripts
+├── sql/                                        # Snowflake DDL and DML scripts
 │   ├── 01_create_tables.sql
 │   ├── 02_load_data.sql
 │   └── 03_gold_layer_tables.sql
 │
-├── terraform/                 # (Infrastructure as Code (IaC) configuration
-│   ├── main.tf                # Main configuration for AWS and Snowflake resources
+├── terraform/                                  # (Infrastructure as Code (IaC) configuration
+│   ├── main.tf                                 # Main configuration for AWS and Snowflake resources
 │   └── terraform.tfvars
 │
-├── dashboards/                # BI dashboards and visualizations
-│   └── screenshots/           # Dashboard screenshots for the README file
+├── dashboards/                                 # BI dashboards and visualizations
+│   └── screenshots/                            # Dashboard screenshots for the README file
 │
-├── requirements.txt           # Python project dependencies
-├── Dockerfile                 # Docker instructions
-├── docker-compose.yml         # Docker configuration for local Airflow
-├── .env                       # Environment variables and configuration settings
-└── README.md                  # Main project documentation and overview
+├── requirements.txt                            # Python project dependencies
+├── Dockerfile                                  # Docker instructions
+├── docker-compose.yml                          # Docker configuration for local Airflow
+├── .env                                        # Environment variables and configuration settings
+└── README.md                                   # Main project documentation and overview
 ```
