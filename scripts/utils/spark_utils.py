@@ -8,6 +8,8 @@ def init_spark_with_s3(aws_access_key, aws_secret_key, region):
     spark = SparkSession.builder \
         .appName("S3_Direct_Read") \
         .master("local[1]") \
+        .config("spark.driver.bindAddress", "127.0.0.1") \
+        .config("spark.driver.host", "127.0.0.1") \
         .config("spark.jars.packages",
                 "org.apache.hadoop:hadoop-aws:3.3.4,"
                 "com.amazonaws:aws-java-sdk-bundle:1.12.262") \
