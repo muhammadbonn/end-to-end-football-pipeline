@@ -16,14 +16,15 @@ def run_snowflake_queries():
     print("[INFO] Initializing Snowflake connection...")
 
     try:
-        # Fetch credentials securely from environment variables
+        # Fetch credentials securely from environment variables.
+        # NOTE: 'schema' is intentionally omitted here so that the SQL scripts 
+        # can dynamically switch between 'Staging' and 'gold' schemas using 'USE SCHEMA'.
         conn = snowflake.connector.connect(
             user=os.getenv('SNOWFLAKE_USER'),
             password=os.getenv('SNOWFLAKE_PASSWORD'),
             account=os.getenv('SNOWFLAKE_ACCOUNT'),
             warehouse=os.getenv('SNOWFLAKE_WAREHOUSE'),
-            database=os.getenv('SNOWFLAKE_DATABASE'),
-            schema=os.getenv('SNOWFLAKE_SCHEMA')
+            database=os.getenv('SNOWFLAKE_DATABASE')
         )
         print("[SUCCESS] Connected to Snowflake successfully!")
     except Exception as e:
@@ -33,7 +34,7 @@ def run_snowflake_queries():
     # ----------------------------------------------------------------------
     # EXECUTE SQL SCRIPTS
     # ----------------------------------------------------------------------
-    # Define the order of SQL scripts to be executed
+    # Define the exact order of SQL scripts to be executed
     sql_files = [
         '/opt/airflow/sql/1_create_tables.sql',
         '/opt/airflow/sql/2_load_data.sql',
@@ -43,6 +44,7 @@ def run_snowflake_queries():
     for file_path in sql_files:
         print(f"[INFO] Executing script: {file_path}")
         try:
+            # Open and read the SQL file
             with open(file_path, 'r', encoding='utf-8') as f:
                 sql_text = f.read()
                 
@@ -50,7 +52,7 @@ def run_snowflake_queries():
                 for cur in conn.execute_string(sql_text):
                     pass
                     
-            print(f"[SUCCESS] Script executed: {file_path}")
+            print(f"[SUCCESS] Script executed successfully: {file_path}")
         except Exception as e:
             print(f"[ERROR] Failed while executing {file_path}: {e}")
             conn.close()
@@ -58,7 +60,7 @@ def run_snowflake_queries():
 
     print("[SUCCESS] All data successfully loaded and transformed in Snowflake! 🚀")
     
-    # Close the connection
+    # Safely close the connection
     conn.close()
 
 if __name__ == "__main__":
