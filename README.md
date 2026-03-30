@@ -94,6 +94,13 @@ The project uses two configuration files for security. Since `.env` is ignored b
      KAGGLE_API_TOKEN=your_kaggle_api_token
      KAGGLE_PATH=technika148/football-database
      PYTHONPATH=/opt/airflow/scripts:/opt/airflow
+     SNOWFLAKE_USER=YOUR_USERNAME
+     SNOWFLAKE_PASSWORD=YOUR_PASSWORD
+     SNOWFLAKE_ACCOUNT=YOUR_ACCOUNT
+     SNOWFLAKE_WAREHOUSE=COMPUTE_WH
+     SNOWFLAKE_DATABASE=ete_football_db
+     SNOWFLAKE_STAGING_SCHEMA=Staging
+     SNOWFLAKE_GOLD_SCHEMA=gold   
      ```
 
    * **B. Configure Infrastructure (Terraform)** Navigate to the `terraform/` directory and edit the `terraform.tfvars` file based on the template:  
