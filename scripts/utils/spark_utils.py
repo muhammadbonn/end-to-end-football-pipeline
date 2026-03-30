@@ -55,8 +55,8 @@ def read_csv(spark, bucket_name, folder, s3_files):
             )
 
             # Count rows (triggers execution)
-            row_count = df.count()
-            print(f"[DONE] {file_name} → {row_count} rows")
+            # row_count = df.count()
+            # print(f"[DONE] {file_name} → {row_count} rows")
 
             # Store DataFrame
             dataframes[clean_name] = df
