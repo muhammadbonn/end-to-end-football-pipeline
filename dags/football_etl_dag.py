@@ -42,13 +42,9 @@ with DAG(
     )
 
     # snowflake load
-    snowflake_load = BashOperator(
-        task_id="load_to_snowflake",
-        bash_command="""
-        snowsql -f /opt/airflow/sql/1_create_tables.sql &&
-        snowsql -f /opt/airflow/sql/2_load_data.sql &&
-        snowsql -f /opt/airflow/sql/3_gold_layer_tables.sql
-        """,
+    load_to_snowflake = BashOperator(
+        task_id='load_to_snowflake',
+        bash_command='python /opt/airflow/scripts/load_to_snowflake.py',
     )
 
     # execution ordering
