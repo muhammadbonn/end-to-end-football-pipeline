@@ -140,8 +140,12 @@ def upload_files_to_s3(s3_client, bucket_name, csv_files, prefix="raw"):
 # LIST FILES FROM S3
 def list_s3_files(s3_client, bucket_name, prefix="raw"):
     """
-    List all files in an S3 bucket under a given prefix
+    List all CSV files in an S3 bucket under a given prefix (folder).
     """
+    # Ensure prefix ends with a slash to correctly target the folder
+    if prefix and not prefix.endswith('/'):
+        prefix += '/'
+
     response = s3_client.list_objects_v2(
         Bucket=bucket_name,
         Prefix=prefix
@@ -153,8 +157,10 @@ def list_s3_files(s3_client, bucket_name, prefix="raw"):
         for obj in response["Contents"]:
             key = obj["Key"]
 
+            # Filter only for .csv files
             if key.endswith(".csv"):
                 file_name = key.split("/")[-1]
                 files.append({"file_name": file_name})
 
     return files
+    
