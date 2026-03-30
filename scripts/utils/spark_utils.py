@@ -14,6 +14,9 @@ def init_spark_with_s3(aws_access_key, aws_secret_key, region):
         .config("spark.hadoop.fs.s3a.secret.key", aws_secret_key) \
         .config("spark.hadoop.fs.s3a.endpoint", f"s3.{region}.amazonaws.com") \
         .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+        .config("spark.driver.memory", "2g") \
+        .config("spark.executor.memory", "2g") \
+        .config("spark.sql.shuffle.partitions", "10") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")
