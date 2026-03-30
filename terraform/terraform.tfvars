@@ -10,6 +10,9 @@ bucket_name         = "your_unique_s3_bucket_name"
 # Name of the main Data Warehouse Database in Snowflake
 database_name       = "ete_football_db"
 
+# AWS region Europe (Frankfurt) eu-central-1
+aws_region          = "eu-central-1"
+
 # Name of the Staging Schema (Silver Layer)
 staging_schema_name = "Staging"
 
