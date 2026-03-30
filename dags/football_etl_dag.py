@@ -48,4 +48,4 @@ with DAG(
     )
 
     # execution ordering
-    ingestion_task >> transform_task >> snowflake_load
+    ingestion_task >> transform_task >> load_to_snowflake
