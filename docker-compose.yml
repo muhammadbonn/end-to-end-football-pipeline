@@ -19,7 +19,7 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags       # Map local DAGs folder to the container
     - ./scripts:/opt/airflow/scripts # Map local Python scripts folder
     - ./logs:/opt/airflow/logs       # Map logs for easier debugging
-    - ./sql:/opt/airflow/sql         # MAp SQLs
+    - ./sql:/opt/airflow/sql         # Map SQLs
   depends_on:
     postgres:
       condition: service_healthy
