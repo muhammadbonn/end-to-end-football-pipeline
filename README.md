@@ -152,7 +152,7 @@ end-to-end-football-pipeline/
 │   ├── main.tf                                 # Main configuration for AWS and Snowflake resources
 │   └── terraform.tfvars
 │
-├── dashboards/                                 # BI dashboard visualizations│
+├── dashboards/                                 # BI dashboard visualizations
 ├── requirements.txt                            # Python project dependencies
 ├── Dockerfile                                  # Docker instructions
 ├── docker-compose.yml                          # Docker configuration for local Airflow
