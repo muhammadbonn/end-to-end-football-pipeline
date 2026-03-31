@@ -26,14 +26,6 @@ I built this pipeline to explore how modern data tools can work in harmony:
 
     Storage & Analytics: Bridging the gap between a Data Lake (S3) and a Cloud Data Warehouse (Snowflake) for high-performance BI
 
-Why Football Data? > The dataset (scraped from Understat/Kaggle) includes over 600,000 shots and thousands of games. It provides a perfect playground for:
-
-    Data Cleaning: Handling inconsistent naming conventions across leagues.
-
-    Type Casting: Managing complex timestamps and coordinate systems (X, Y positions).
-
-    Aggregation: Building complex analytical views like "Striker Efficiency" which requires joining multiple large tables.
-
 ---
 ## 📊 Gold Layer Dashboards
 
