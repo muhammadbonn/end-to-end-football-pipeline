@@ -33,6 +33,18 @@ Why Football Data? > The dataset (scraped from Understat/Kaggle) includes over 6
     Type Casting: Managing complex timestamps and coordinate systems (X, Y positions).
 
     Aggregation: Building complex analytical views like "Striker Efficiency" which requires joining multiple large tables.
+
+---
+## 📊 Gold Layer Dashboards
+
+### 1. Top 10 Clinical Finishers
+![Strikers Dashboard](dashboards/Goals_vs_Expected_Goals_(xG)_(2014-2020).png)
+
+### 2. Shot Conversion Analysis
+![Shot Analysis](dashboards/Conversion_Rate_by_Shot_Situation_(2014-2020).png)
+
+### 3. Top 10 Dominant Teams at Home
+![Dominant Teams](dashboards/Top_Teams_by_Total_Points_at_Home_(2014-2020).png)
     
 ---
 ## Technology Stack
