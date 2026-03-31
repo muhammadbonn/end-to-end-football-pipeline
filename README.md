@@ -40,13 +40,14 @@ I built this pipeline to explore how modern data tools can work in harmony:
     
 ---
 ## Technology Stack
-* **Language:** Python
+* **Languages:** Python and SQL
 * **Data Processing:** Apache Spark (PySpark)
 * **Data Lake:** AWS S3
 * **Data Warehouse:** Snowflake
 * **Orchestration:** Apache Airflow
 * **Infrastructure as Code (IaC):** Terraform
 * **Data Visualization:** Streamlit
+* **Containerization:** Docker
 
 ---
 ## Architecture & Workflow
