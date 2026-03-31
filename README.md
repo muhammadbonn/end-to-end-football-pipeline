@@ -11,6 +11,8 @@
 
 While this project uses European Football Data as a case study, the core objective was to engineer a production-grade data platform.
 
+https://www.kaggle.com/datasets/technika148/football-database
+
 The Challenge: Football data is notoriously messy—player names have special characters, match events are deeply nested, and statistics like "Expected Goals (xG)" require complex derived calculations. Processing this at scale manually is impossible.
 
 The Solution:
