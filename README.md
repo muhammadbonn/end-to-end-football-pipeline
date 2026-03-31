@@ -7,7 +7,7 @@
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-%23FF4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)
 
-[Data Pipeline Diagram](ete_football_drawio.png)
+![Data Pipeline Diagram](ete_football_drawio.png)
 
 # End-to-End Football Data Engineering Pipeline
 ## Project Philosophy & Problem Statement
